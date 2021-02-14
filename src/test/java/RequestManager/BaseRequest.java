@@ -1,14 +1,13 @@
 package RequestManager;
 
 import io.restassured.RestAssured;
-import org.junit.After;
-import org.junit.Before;
-
+import org.testng.annotations.AfterTest;
+import org.testng.annotations.BeforeTest;
 public class BaseRequest {
 
     String apiKey;
 
-    @Before
+    @BeforeTest
     public void setUp() throws Exception
     {
         initialize();
@@ -20,7 +19,7 @@ public class BaseRequest {
         apiKey = "88489135";
     }
 
-    @After
+    @AfterTest
     public void tearDown()
     {
     }

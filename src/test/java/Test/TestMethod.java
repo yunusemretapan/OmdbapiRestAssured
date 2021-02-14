@@ -1,7 +1,9 @@
 package Test;
 
+import Constant.Search;
 import ResponseManager.Response;
-import org.junit.Test;
+import org.testng.Assert;
+import org.testng.annotations.Test;
 
 public class TestMethod extends Response {
 
@@ -11,6 +13,9 @@ public class TestMethod extends Response {
     public void testMovieDetails()
     {
         String filmId = getMovieId(movieName);
-        searchWithId(filmId);
+        Search search = searchWithId(filmId);
+        Assert.assertEquals("2001",search.year);
+        Assert.assertEquals("Harry Potter and the Sorcerer's Stone",search.title);
+        Assert.assertEquals("16 Nov 2001",search.released);
     }
 }

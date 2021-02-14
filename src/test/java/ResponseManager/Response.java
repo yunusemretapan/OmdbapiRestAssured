@@ -1,19 +1,18 @@
 package ResponseManager;
 
+import Constant.Search;
 import RequestManager.Request;
 import io.restassured.path.json.JsonPath;
 import org.apache.http.HttpStatus;
-
-
 import static io.restassured.RestAssured.baseURI;
-import static org.hamcrest.CoreMatchers.equalTo;
 
 public class Response extends Request {
 
     String expectedValue = "Harry Potter and the Sorcerer's Stone";
     String imdbId;
-    String find = "";
     int counter = 0;
+    String find = "Search[" + counter + "].Title";
+
 
     public String getMovieId(String movieName)
     {
@@ -32,13 +31,13 @@ public class Response extends Request {
         return imdbId;
     }
 
-    public void searchWithId(String imdbId)
+    public Search searchWithId(String imdbId)
     {
         requestSpecification = requestById(imdbId);
-        requestSpecification.when().get(baseURI).then().log().all()
-                .statusCode(HttpStatus.SC_OK).and()
-                .body("Title", equalTo("Harry Potter and the Sorcerer's Stone")).and()
-                .body("Year",equalTo("2001")).and()
-                .body("Released",equalTo("16 Nov 2001"));
+        io.restassured.response.Response response = requestSpecification
+                .when().get(baseURI)
+                .then().log().all().statusCode(HttpStatus.SC_OK).extract().response();
+
+        return response.jsonPath().getObject("", Search.class);
     }
 }
