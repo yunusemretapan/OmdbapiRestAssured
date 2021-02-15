@@ -36,4 +36,13 @@ public class Request extends BaseRequest {
                 param(Data.API_VERSION.getData(), "1");
         return requestSpecification;
     }
+
+    public RequestSpecification requestLord(String movieName, String year)
+    {
+        requestSpecification = given().
+                param(Data.API_KEY.getData(), apiKey).
+                param(Data.TITLE.getData(), movieName).
+                param(Data.YEAR.getData(), year);
+        return requestSpecification;
+    }
 }

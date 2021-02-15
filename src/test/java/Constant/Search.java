@@ -53,5 +53,7 @@ public class Search {
         @JsonProperty("Website")
         private String website;
         @JsonProperty("Response")
-        private String response;
+        public String response;
+        @JsonProperty("Error")
+        public String Error;
     }

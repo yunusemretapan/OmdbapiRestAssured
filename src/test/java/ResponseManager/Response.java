@@ -40,4 +40,12 @@ public class Response extends Request {
 
         return response.jsonPath().getObject("", Search.class);
     }
+
+    public Search searchLord(String movieName,String year){
+        requestSpecification = requestLord(movieName, year);
+        io.restassured.response.Response response = requestSpecification
+                .when().get(baseURI)
+                .then().log().all().statusCode(HttpStatus.SC_OK).extract().response();
+        return response.jsonPath().getObject("",Search.class);
+    }
 }
